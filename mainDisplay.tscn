@@ -1,0 +1,173 @@
+[gd_scene load_steps=6 format=3 uid="uid://bem7c5800w4n3"]
+
+[ext_resource type="PackedScene" uid="uid://cpehif7ytnqri" path="res://TestModels/baseCube.glb" id="1_dmaiw"]
+[ext_resource type="Script" path="res://mainObject.gd" id="2_s5j41"]
+[ext_resource type="PackedScene" uid="uid://bqk0ql7ntfwjc" path="res://TestModels/basePyramid.glb" id="3_6a1em"]
+[ext_resource type="PackedScene" uid="uid://cex42jkg5rje8" path="res://TestModels/baseCylinder.glb" id="4_1psm4"]
+
+[sub_resource type="Environment" id="Environment_4dqag"]
+background_mode = 1
+
+[node name="Root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4dqag")
+
+[node name="baseModel" parent="." instance=ExtResource("1_dmaiw")]
+visible = false
+script = ExtResource("2_s5j41")
+
+[node name="basePyramid" parent="." instance=ExtResource("3_6a1em")]
+visible = false
+script = ExtResource("2_s5j41")
+
+[node name="baseCylinder" parent="." instance=ExtResource("4_1psm4")]
+script = ExtResource("2_s5j41")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="RightSpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_angle = 90.0
+
+[node name="LeftSpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -3)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_angle = 90.0
+
+[node name="FrontSpotLight3D3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-1.07284e-07, 0, 1, 0, 1, 0, -1, 0, -1.07284e-07, 3, 0, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_angle = 90.0
+
+[node name="BackSpotLight3D4" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, -3, 0, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_angle = 90.0
+
+[node name="UpSpotLight3D5" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-8.51091e-15, 1, 4.37114e-08, -1.94707e-07, -4.37114e-08, 1, 1, 0, 1.94707e-07, 0, 3, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_angle = 90.0
+
+[node name="UpSpotLight3D6" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(-8.51091e-15, -1, 4.37114e-08, 1.94707e-07, -4.37114e-08, -1, 1, 0, 1.94707e-07, 0, -3, 0)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+spot_angle = 90.0
+
+[node name="ColorRects" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BlackColorRect" type="ColorRect" parent="ColorRects"]
+offset_right = 1151.0
+offset_bottom = 650.0
+color = Color(0, 0, 0, 1)
+
+[node name="PinkColorRect2" type="ColorRect" parent="ColorRects"]
+visible = false
+offset_right = 1151.0
+offset_bottom = 650.0
+color = Color(0.900844, 0.000866161, 0.933959, 1)
+
+[node name="UpSubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_right = 110.0
+offset_bottom = 220.0
+grow_horizontal = 2
+pivot_offset = Vector2(110, 110)
+
+[node name="SubViewport" type="SubViewport" parent="UpSubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(220, 220)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="UpSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
+
+[node name="DownSubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -220.0
+offset_right = 110.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+pivot_offset = Vector2(110, 110)
+
+[node name="SubViewport" type="SubViewport" parent="DownSubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(220, 220)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="DownSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
+
+[node name="LeftSubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 245.0
+offset_top = -109.0
+offset_right = 465.0
+offset_bottom = 111.0
+grow_vertical = 2
+rotation = 4.71239
+pivot_offset = Vector2(110, 110)
+
+[node name="SubViewport" type="SubViewport" parent="LeftSubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(220, 220)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="LeftSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
+
+[node name="RightSubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -465.0
+offset_top = -109.0
+offset_right = -245.0
+offset_bottom = 111.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.5708
+pivot_offset = Vector2(110, 110)
+
+[node name="SubViewport" type="SubViewport" parent="RightSubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(220, 220)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="RightSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
+
+[editable path="baseModel"]
+[editable path="basePyramid"]
+[editable path="baseCylinder"]

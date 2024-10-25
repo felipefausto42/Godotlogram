@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="Godotlogram"
+run/main_scene="res://mainDisplay.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=3
+window/stretch/mode="viewport"
 
 [rendering]
 
