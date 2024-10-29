@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bem7c5800w4n3"]
+[gd_scene load_steps=15 format=3 uid="uid://bem7c5800w4n3"]
 
 [ext_resource type="PackedScene" uid="uid://cpehif7ytnqri" path="res://TestModels/baseCube.glb" id="1_dmaiw"]
+[ext_resource type="Script" path="res://Tools/main_display.gd" id="1_uluph"]
 [ext_resource type="Script" path="res://mainObject.gd" id="2_s5j41"]
 [ext_resource type="PackedScene" uid="uid://bqk0ql7ntfwjc" path="res://TestModels/basePyramid.glb" id="3_6a1em"]
 [ext_resource type="PackedScene" uid="uid://cex42jkg5rje8" path="res://TestModels/baseCylinder.glb" id="4_1psm4"]
@@ -8,23 +9,30 @@
 [ext_resource type="Texture2D" uid="uid://b71cq2vjupgn7" path="res://Assets/UI/arrowButton.png" id="6_ehx1k"]
 [ext_resource type="Texture2D" uid="uid://cb3datakwhf21" path="res://Assets/UI/minusIcon.png" id="7_s36vb"]
 [ext_resource type="Texture2D" uid="uid://c2rvbf7vobm8i" path="res://Assets/UI/plusIcon.png" id="8_qunkq"]
+[ext_resource type="Texture2D" uid="uid://ca51supdk78yi" path="res://Assets/UI/visibilityIcon.png" id="9_jlam6"]
+[ext_resource type="Texture2D" uid="uid://byyu3qs2cql4w" path="res://Assets/UI/blueButton.png" id="11_06a2v"]
+[ext_resource type="Texture2D" uid="uid://xuounrweveci" path="res://Assets/UI/yellowButton.png" id="12_ibgtc"]
+[ext_resource type="Texture2D" uid="uid://wexxu8nqif5p" path="res://Assets/UI/purpleButton.png" id="13_kc8p2"]
 
 [sub_resource type="Environment" id="Environment_4dqag"]
 background_mode = 1
 
 [node name="Root" type="Node3D"]
+script = ExtResource("1_uluph")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4dqag")
 
-[node name="baseModel" parent="." instance=ExtResource("1_dmaiw")]
+[node name="Models" type="Node3D" parent="."]
+
+[node name="baseModel" parent="Models" instance=ExtResource("1_dmaiw")]
 script = ExtResource("2_s5j41")
 
-[node name="basePyramid" parent="." instance=ExtResource("3_6a1em")]
+[node name="basePyramid" parent="Models" instance=ExtResource("3_6a1em")]
 visible = false
 script = ExtResource("2_s5j41")
 
-[node name="baseCylinder" parent="." instance=ExtResource("4_1psm4")]
+[node name="baseCylinder" parent="Models" instance=ExtResource("4_1psm4")]
 visible = false
 script = ExtResource("2_s5j41")
 
@@ -175,8 +183,6 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
 script = ExtResource("5_31yus")
 
-[node name="Models" type="Node3D" parent="."]
-
 [node name="ModelRotation" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -283,14 +289,61 @@ offset_right = 512.0
 offset_bottom = -3768.0
 texture_normal = ExtResource("8_qunkq")
 
-[connection signal="button_down" from="ModelRotation/RotateUp" to="baseModel" method="_on_rotate_up_button_down"]
-[connection signal="button_up" from="ModelRotation/RotateUp" to="baseModel" method="_on_rotate_up_button_up"]
-[connection signal="button_down" from="ModelRotation/RotateDown" to="baseModel" method="_on_rotate_down_button_down"]
-[connection signal="button_up" from="ModelRotation/RotateDown" to="baseModel" method="_on_rotate_down_button_up"]
-[connection signal="button_down" from="ModelRotation/RotateLeft" to="baseModel" method="_on_rotate_left_button_down"]
-[connection signal="button_up" from="ModelRotation/RotateLeft" to="baseModel" method="_on_rotate_left_button_up"]
-[connection signal="button_down" from="ModelRotation/RotateRight" to="baseModel" method="_on_rotate_right_button_down"]
-[connection signal="button_up" from="ModelRotation/RotateRight" to="baseModel" method="_on_rotate_right_button_up"]
+[node name="SceneControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 17.0
+offset_right = 56.0
+offset_bottom = 57.0
+scale = Vector2(0.1, 0.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SceneControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 50
+
+[node name="Visibility" type="TextureButton" parent="SceneControl/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("9_jlam6")
+
+[node name="TextureButton" type="TextureButton" parent="SceneControl/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_06a2v")
+
+[node name="TextureButton2" type="TextureButton" parent="SceneControl/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("12_ibgtc")
+
+[node name="TextureButton3" type="TextureButton" parent="SceneControl/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_kc8p2")
+
+[connection signal="button_down" from="ModelRotation/RotateUp" to="Models/baseModel" method="_on_rotate_up_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateUp" to="Models/baseCylinder" method="_on_rotate_up_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateUp" to="Models/basePyramid" method="_on_rotate_up_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateUp" to="Models/baseModel" method="_on_rotate_up_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateUp" to="Models/baseCylinder" method="_on_rotate_up_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateUp" to="Models/basePyramid" method="_on_rotate_up_button_up"]
+[connection signal="button_down" from="ModelRotation/RotateDown" to="Models/baseModel" method="_on_rotate_down_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateDown" to="Models/baseCylinder" method="_on_rotate_down_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateDown" to="Models/basePyramid" method="_on_rotate_down_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateDown" to="Models/baseModel" method="_on_rotate_down_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateDown" to="Models/baseCylinder" method="_on_rotate_down_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateDown" to="Models/basePyramid" method="_on_rotate_down_button_up"]
+[connection signal="button_down" from="ModelRotation/RotateLeft" to="Models/baseModel" method="_on_rotate_left_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateLeft" to="Models/baseCylinder" method="_on_rotate_left_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateLeft" to="Models/basePyramid" method="_on_rotate_left_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateLeft" to="Models/baseModel" method="_on_rotate_left_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateLeft" to="Models/baseCylinder" method="_on_rotate_left_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateLeft" to="Models/basePyramid" method="_on_rotate_left_button_up"]
+[connection signal="button_down" from="ModelRotation/RotateRight" to="Models/baseModel" method="_on_rotate_right_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateRight" to="Models/baseCylinder" method="_on_rotate_right_button_down"]
+[connection signal="button_down" from="ModelRotation/RotateRight" to="Models/basePyramid" method="_on_rotate_right_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateRight" to="Models/baseModel" method="_on_rotate_right_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateRight" to="Models/baseCylinder" method="_on_rotate_right_button_up"]
+[connection signal="button_up" from="ModelRotation/RotateRight" to="Models/basePyramid" method="_on_rotate_right_button_up"]
 [connection signal="button_down" from="CameraMovement/MoveUp" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
 [connection signal="button_down" from="CameraMovement/MoveUp" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
 [connection signal="button_down" from="CameraMovement/MoveUp" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
@@ -339,7 +392,11 @@ texture_normal = ExtResource("8_qunkq")
 [connection signal="button_up" from="CameraMovement/ZoomOut" to="DownSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
 [connection signal="button_up" from="CameraMovement/ZoomOut" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
 [connection signal="button_up" from="CameraMovement/ZoomOut" to="RightSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
+[connection signal="pressed" from="SceneControl/VBoxContainer/Visibility" to="." method="_on_visibility_pressed"]
+[connection signal="pressed" from="SceneControl/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="SceneControl/VBoxContainer/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="SceneControl/VBoxContainer/TextureButton3" to="." method="_on_texture_button_3_pressed"]
 
-[editable path="baseModel"]
-[editable path="basePyramid"]
-[editable path="baseCylinder"]
+[editable path="Models/baseModel"]
+[editable path="Models/basePyramid"]
+[editable path="Models/baseCylinder"]

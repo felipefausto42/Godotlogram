@@ -37,11 +37,11 @@ func move_camera(axis : String, direction : int, limit : float) -> void:
 		"x":
 			if direction == 1:
 				if global_position.x > limit:
-					global_position.x -= .02 
+					global_position.x += .02 
 				return
 			elif direction == -1:
 				if global_position.x < limit:
-					global_position.x += .02
+					global_position.x -= .02
 				return
 		"y":
 			if direction == 1:
