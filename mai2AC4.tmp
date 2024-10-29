@@ -104,6 +104,7 @@ size = Vector2i(220, 220)
 render_target_update_mode = 4
 
 [node name="Camera" type="Camera3D" parent="UpSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
 script = ExtResource("5_31yus")
 
 [node name="DownSubViewportContainer" type="SubViewportContainer" parent="."]
@@ -125,8 +126,8 @@ handle_input_locally = false
 size = Vector2i(220, 220)
 render_target_update_mode = 4
 
-[node name="Camera" type="Camera3D" parent="DownSubViewportContainer/SubViewport"]
-script = ExtResource("5_31yus")
+[node name="Camera3D" type="Camera3D" parent="DownSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
 
 [node name="LeftSubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 4
@@ -145,8 +146,8 @@ handle_input_locally = false
 size = Vector2i(220, 220)
 render_target_update_mode = 4
 
-[node name="Camera" type="Camera3D" parent="LeftSubViewportContainer/SubViewport"]
-script = ExtResource("5_31yus")
+[node name="Camera3D" type="Camera3D" parent="LeftSubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
 
 [node name="RightSubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 6
@@ -168,11 +169,57 @@ handle_input_locally = false
 size = Vector2i(220, 220)
 render_target_update_mode = 4
 
-[node name="Camera" type="Camera3D" parent="RightSubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="RightSubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
-script = ExtResource("5_31yus")
 
 [node name="Models" type="Node3D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 84.0
+offset_top = 468.0
+offset_right = 124.0
+offset_bottom = 508.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Up" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Cima"
+
+[node name="Down" type="Button" parent="Control"]
+layout_mode = 0
+offset_top = 72.0
+offset_right = 51.0
+offset_bottom = 103.0
+text = "Baixo"
+
+[node name="Left" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -42.0
+offset_top = 40.0
+offset_right = -7.0
+offset_bottom = 71.0
+text = "Esq"
+
+[node name="Right" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 40.0
+offset_right = 83.0
+offset_bottom = 71.0
+text = "Dir"
+
+[connection signal="button_down" from="Control/Up" to="baseModel" method="_on_up_button_down"]
+[connection signal="button_up" from="Control/Up" to="baseModel" method="_on_up_button_up"]
+[connection signal="button_down" from="Control/Down" to="baseModel" method="_on_down_button_down"]
+[connection signal="button_up" from="Control/Down" to="baseModel" method="_on_down_button_up"]
+[connection signal="button_down" from="Control/Left" to="baseModel" method="_on_left_button_down"]
+[connection signal="button_up" from="Control/Left" to="baseModel" method="_on_left_button_up"]
+[connection signal="button_down" from="Control/Right" to="baseModel" method="_on_right_button_down"]
+[connection signal="button_up" from="Control/Right" to="baseModel" method="_on_right_button_up"]
 
 [editable path="baseModel"]
 [editable path="basePyramid"]
