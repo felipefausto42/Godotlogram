@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [display]
 
 window/size/mode=3
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [input]
 
@@ -61,3 +61,4 @@ reset_camera={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
