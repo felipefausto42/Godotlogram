@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bem7c5800w4n3"]
+[gd_scene load_steps=10 format=3 uid="uid://bem7c5800w4n3"]
 
 [ext_resource type="PackedScene" uid="uid://cpehif7ytnqri" path="res://TestModels/baseCube.glb" id="1_dmaiw"]
 [ext_resource type="Script" path="res://mainObject.gd" id="2_s5j41"]
 [ext_resource type="PackedScene" uid="uid://bqk0ql7ntfwjc" path="res://TestModels/basePyramid.glb" id="3_6a1em"]
 [ext_resource type="PackedScene" uid="uid://cex42jkg5rje8" path="res://TestModels/baseCylinder.glb" id="4_1psm4"]
 [ext_resource type="Script" path="res://Tools/camera.gd" id="5_31yus"]
+[ext_resource type="Texture2D" uid="uid://b71cq2vjupgn7" path="res://Assets/UI/arrowButton.png" id="6_ehx1k"]
+[ext_resource type="Texture2D" uid="uid://cb3datakwhf21" path="res://Assets/UI/minusIcon.png" id="7_s36vb"]
+[ext_resource type="Texture2D" uid="uid://c2rvbf7vobm8i" path="res://Assets/UI/plusIcon.png" id="8_qunkq"]
 
 [sub_resource type="Environment" id="Environment_4dqag"]
 background_mode = 1
@@ -173,6 +176,169 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.2)
 script = ExtResource("5_31yus")
 
 [node name="Models" type="Node3D" parent="."]
+
+[node name="ModelRotation" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 56.0
+offset_top = 559.0
+offset_right = 96.0
+offset_bottom = 599.0
+scale = Vector2(0.1, 0.1)
+
+[node name="RotateUp" type="TextureButton" parent="ModelRotation"]
+layout_mode = 0
+offset_top = -600.0
+offset_right = 512.0
+offset_bottom = -88.0
+rotation = -1.5708
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="RotateDown" type="TextureButton" parent="ModelRotation"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 512.0
+offset_bottom = 612.0
+rotation = 1.5708
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="RotateLeft" type="TextureButton" parent="ModelRotation"]
+layout_mode = 0
+offset_left = -400.0
+offset_top = -256.0
+offset_right = 112.0
+offset_bottom = 256.0
+rotation = 3.14159
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="RotateRight" type="TextureButton" parent="ModelRotation"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = -256.0
+offset_right = 912.0
+offset_bottom = 256.0
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="CameraMovement" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1046.0
+offset_top = 559.0
+offset_right = 1086.0
+offset_bottom = 599.0
+scale = Vector2(0.1, 0.1)
+
+[node name="MoveUp" type="TextureButton" parent="CameraMovement"]
+layout_mode = 0
+offset_top = -600.0
+offset_right = 512.0
+offset_bottom = -88.0
+rotation = -1.5708
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="MoveDown" type="TextureButton" parent="CameraMovement"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 512.0
+offset_bottom = 612.0
+rotation = 1.5708
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="MoveLeft" type="TextureButton" parent="CameraMovement"]
+layout_mode = 0
+offset_left = -400.0
+offset_top = -256.0
+offset_right = 112.0
+offset_bottom = 256.0
+rotation = 3.14159
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="MoveRight" type="TextureButton" parent="CameraMovement"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = -256.0
+offset_right = 912.0
+offset_bottom = 256.0
+pivot_offset = Vector2(256, 256)
+texture_normal = ExtResource("6_ehx1k")
+
+[node name="ZoomIn" type="TextureButton" parent="CameraMovement"]
+layout_mode = 0
+offset_top = -4940.0
+offset_right = 512.0
+offset_bottom = -4428.0
+texture_normal = ExtResource("7_s36vb")
+
+[node name="ZoomOut" type="TextureButton" parent="CameraMovement"]
+layout_mode = 0
+offset_top = -4280.0
+offset_right = 512.0
+offset_bottom = -3768.0
+texture_normal = ExtResource("8_qunkq")
+
+[connection signal="button_down" from="ModelRotation/RotateUp" to="baseModel" method="_on_rotate_up_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateUp" to="baseModel" method="_on_rotate_up_button_up"]
+[connection signal="button_down" from="ModelRotation/RotateDown" to="baseModel" method="_on_rotate_down_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateDown" to="baseModel" method="_on_rotate_down_button_up"]
+[connection signal="button_down" from="ModelRotation/RotateLeft" to="baseModel" method="_on_rotate_left_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateLeft" to="baseModel" method="_on_rotate_left_button_up"]
+[connection signal="button_down" from="ModelRotation/RotateRight" to="baseModel" method="_on_rotate_right_button_down"]
+[connection signal="button_up" from="ModelRotation/RotateRight" to="baseModel" method="_on_rotate_right_button_up"]
+[connection signal="button_down" from="CameraMovement/MoveUp" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveUp" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveUp" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveUp" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_down"]
+[connection signal="button_up" from="CameraMovement/MoveUp" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveUp" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveUp" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveUp" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_up_button_up"]
+[connection signal="button_down" from="CameraMovement/MoveDown" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveDown" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveDown" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveDown" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_down"]
+[connection signal="button_up" from="CameraMovement/MoveDown" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveDown" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveDown" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveDown" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_down_button_up"]
+[connection signal="button_down" from="CameraMovement/MoveLeft" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveLeft" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveLeft" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveLeft" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_down"]
+[connection signal="button_up" from="CameraMovement/MoveLeft" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveLeft" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveLeft" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveLeft" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_left_button_up"]
+[connection signal="button_down" from="CameraMovement/MoveRight" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveRight" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveRight" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_down"]
+[connection signal="button_down" from="CameraMovement/MoveRight" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_down"]
+[connection signal="button_up" from="CameraMovement/MoveRight" to="UpSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveRight" to="DownSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveRight" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_up"]
+[connection signal="button_up" from="CameraMovement/MoveRight" to="RightSubViewportContainer/SubViewport/Camera" method="_on_move_right_button_up"]
+[connection signal="button_down" from="CameraMovement/ZoomIn" to="UpSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_down"]
+[connection signal="button_down" from="CameraMovement/ZoomIn" to="DownSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_down"]
+[connection signal="button_down" from="CameraMovement/ZoomIn" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_down"]
+[connection signal="button_down" from="CameraMovement/ZoomIn" to="RightSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_down"]
+[connection signal="button_up" from="CameraMovement/ZoomIn" to="UpSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_up"]
+[connection signal="button_up" from="CameraMovement/ZoomIn" to="DownSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_up"]
+[connection signal="button_up" from="CameraMovement/ZoomIn" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_up"]
+[connection signal="button_up" from="CameraMovement/ZoomIn" to="RightSubViewportContainer/SubViewport/Camera" method="_on_zoom_in_button_up"]
+[connection signal="button_down" from="CameraMovement/ZoomOut" to="UpSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_down"]
+[connection signal="button_down" from="CameraMovement/ZoomOut" to="DownSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_down"]
+[connection signal="button_down" from="CameraMovement/ZoomOut" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_down"]
+[connection signal="button_down" from="CameraMovement/ZoomOut" to="RightSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_down"]
+[connection signal="button_up" from="CameraMovement/ZoomOut" to="UpSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
+[connection signal="button_up" from="CameraMovement/ZoomOut" to="DownSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
+[connection signal="button_up" from="CameraMovement/ZoomOut" to="LeftSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
+[connection signal="button_up" from="CameraMovement/ZoomOut" to="RightSubViewportContainer/SubViewport/Camera" method="_on_zoom_out_button_up"]
 
 [editable path="baseModel"]
 [editable path="basePyramid"]

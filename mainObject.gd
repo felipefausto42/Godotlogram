@@ -49,3 +49,28 @@ func _on_right_button_down() -> void:
 
 func _on_right_button_up() -> void:
 	move_left = false
+
+
+func _on_rotate_up_button_down() -> void:
+	move_up = true
+
+func _on_rotate_up_button_up() -> void:
+	move_up = false
+
+func _on_rotate_down_button_down() -> void:
+	move_down = true
+
+func _on_rotate_down_button_up() -> void:
+	move_down = false
+
+func _on_rotate_left_button_down() -> void:
+	move_left = true
+
+func _on_rotate_left_button_up() -> void:
+	move_left = false
+
+func _on_rotate_right_button_down() -> void:
+	move_right = true
+
+func _on_rotate_right_button_up() -> void:
+	move_right = false
